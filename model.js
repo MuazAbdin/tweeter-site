@@ -47,7 +47,14 @@ const Tweeter = function () {
     return newPost;
   }
 
-  function removePost(postID) {}
+  function removePost(postID) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      console.log("Post does not exist");
+    }
+    _posts.splice(postIdx, 1);
+    // _posts.filter((post) => post.id !== postID);
+  }
 
   return { getPosts, addPost, removePost };
 };
