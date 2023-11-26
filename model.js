@@ -28,6 +28,13 @@ const Tweeter = function () {
   let commentIdCounter = 6;
 
   /* Private Methods */
+  function _generatePostID() {
+    return `p${++postIdCounter}`;
+  }
+
+  function _generateCommentID() {
+    return `c${++commentIdCounter}`;
+  }
 
   /* Public Methods */
   function getPosts() {}
