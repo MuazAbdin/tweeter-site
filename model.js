@@ -41,7 +41,11 @@ const Tweeter = function () {
     return _posts;
   }
 
-  function addPost(text) {}
+  function addPost(text) {
+    const newPost = { text, id: _generatePostID(), comments: [] };
+    _posts.push(newPost);
+    return newPost;
+  }
 
   function removePost(postID) {}
 
