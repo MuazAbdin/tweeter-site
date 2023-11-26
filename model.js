@@ -50,11 +50,21 @@ const Tweeter = function () {
   function removePost(postID) {
     const postIdx = _posts.findIndex((post) => post.id === postID);
     if (postIdx === -1) {
-      console.log("Post does not exist");
+      return console.log("Post does not exist");
     }
     _posts.splice(postIdx, 1);
     // _posts.filter((post) => post.id !== postID);
   }
 
-  return { getPosts, addPost, removePost };
+  function addComment(text, postID) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    const newComment = { id: _generateCommentID(), text };
+    _posts[postIdx].comments.push(newComment);
+    return newComment;
+  }
+
+  return { getPosts, addPost, removePost, addComment };
 };
