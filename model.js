@@ -37,7 +37,9 @@ const Tweeter = function () {
   }
 
   /* Public Methods */
-  function getPosts() {}
+  function getPosts() {
+    return _posts;
+  }
 
   function addPost(text) {}
 
