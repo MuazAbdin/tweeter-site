@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;500;700&display=swap");
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* fonts */
+  --main-font: "Ubuntu", sans-serif;
+  --secondary-font: "Merriweather", serif;
+
+  /* colors */
+  --main-color-1: #265073;
+  --main-color-2: #2d9596;
+  --main-color-3: #9ad0c2;
+  --main-color-4: #ecf4d6;
+
+  --green-1: #429b42;
+  --green-2: #90e690;
+  --yellow-1: #cfb833;
+  --yellow-2: #fcec70;
+  --red-1: darkred;
+  --red-2: #f4acac;
+
+  /* measurements */
+  --padding-size: 10px;
+  --margin-size: 10px;
+  --radius-size: 10px;
+}
+
+#body-container {
+  min-height: 95vh;
+  padding: var(--padding-size);
+  margin: var(--margin-size);
+  border-radius: var(--radius-size);
+  border: 2px dashed var(--main-color-1);
+  box-shadow: 0px 0px 15px var(--main-color-2);
+  font-family: var(--main-font);
+  color: var(--main-color-1);
+  text-shadow: 0px 0px 5px var(--main-color-2);
+  display: grid;
+  grid-template-rows: 2fr 15fr 1fr;
+}
+
+.main-header {
+  background-color: var(--main-color-3);
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px 50px;
+  font-size: xx-large;
+}
+
+.main-footer {
+  background-color: var(--main-color-3);
+  border-radius: 0px 0px 10px 10px;
+  padding: 0px 25px 0px 0px;
+  font-size: small;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+main {
+  padding: 25px;
+  margin: var(--margin-size) 0px;
+  background-color: var(--main-color-4);
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.new-text-component {
+  margin: var(--margin-size);
+  padding: var(--padding-size);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.new-post {
+  height: 5rem;
+  width: 80%;
+}
+
+.new-comment {
+  height: 4rem;
+  width: 95%;
+  justify-content: center;
+}
+
+.text-input {
+  height: 100%;
+  padding: var(--padding-size);
+  border-radius: 10px 0px 0px 10px;
+  border: 2px solid var(--main-color-1);
+}
+
+.new-post > input {
+  flex-grow: 2;
+  font-family: var(--main-font);
+  font-size: large;
+}
+
+.new-comment > input {
+  flex-grow: 7;
+  font-family: var(--secondary-font);
+}
+
+.post-btn {
+  flex-grow: 1;
+  height: 100%;
+  padding: var(--padding-size);
+  letter-spacing: 0.25rem;
+  border-radius: 0px 10px 10px 0px;
+  border: 2px solid var(--main-color-1);
+  background-color: var(--main-color-3);
+  color: var(--main-color-1);
+  cursor: pointer;
+}
+
+.post-btn:hover {
+  background-color: var(--main-color-2);
+}
+
+.new-post > button {
+  font-family: var(--main-font);
+  font-size: large;
+  font-weight: 700;
+}
+
+.new-comment > button {
+  font-family: var(--secondary-font);
+  font-size: medium;
+  font-weight: 700;
+}
+
+.all-posts {
+  width: 80%;
+  margin: var(--margin-size);
+  padding: var(--padding-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.post {
+  border: 2px solid var(--main-color-1);
+  border-radius: var(--radius-size);
+  box-shadow: 0px 0px 5px var(--main-color-2);
+  padding: var(--padding-size);
+  width: 100%;
+  font-family: var(--secondary-font);
+  text-shadow: none;
+  position: relative;
+}
+
+.post-controller,
+.comment-controller {
+  display: flex;
+  /* border: 1px solid black; */
+}
+
+.all-comments {
+  border-top: 1px dashed var(--main-color-1);
+  border-bottom: 1px dashed var(--main-color-1);
+}
+
+.post-text {
+  border: 2px solid black;
+  border-radius: var(--radius-size);
+  padding: var(--padding-size);
+  box-shadow: 0px 0px 5px black;
+  background-color: hsl(0, 0%, 95%);
+  width: 80%;
+  font-size: large;
+  font-weight: 700;
+  margin: var(--margin-size);
+}
+
+.comment-text {
+  border-radius: var(--radius-size);
+  padding: var(--padding-size);
+  box-shadow: 0px 0px 5px black;
+  background-color: hsl(0, 0%, 95%);
+  width: 85%;
+  margin: var(--margin-size);
+}
+
+.btn {
+  margin: var(--margin-size);
+  padding: var(--padding-size);
+  font-family: var(--main-font);
+  border-radius: var(--radius-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--padding-size);
+  cursor: pointer;
+}
+
+.del-btn {
+  border: 2px solid var(--red-1);
+  background-color: var(--red-2);
+  color: var(--red-1);
+}
+
+.del-btn:hover {
+  background-color: #ec7e7e;
+}
