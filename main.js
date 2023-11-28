@@ -26,4 +26,12 @@ $(".all-posts").on("click", ".comment-btn", function () {
   renderer.renderPosts(tweeter.getPosts());
 });
 
+// Delete Comment button
+$(".all-posts").on("click", ".comment-controller .del-btn", function () {
+  const postID = $(this).closest(".post").data().id;
+  const commentID = $(this).closest(".comment-controller").data().id;
+  tweeter.removeComment(postID, commentID);
+  renderer.renderPosts(tweeter.getPosts());
+});
+
 renderer.renderPosts(tweeter.getPosts());
