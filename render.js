@@ -13,13 +13,36 @@ const Renderer = function () {
     `;
   };
 
+  const _renderEditComment = (text) => {
+    return `
+      <div class="new-text-component edit-comment">
+        <input
+          class="text-input"
+          type="text"
+          id="edited-comment-text"
+          name="edited-comment-text"
+          value="${text}"
+        />
+        <button class="btn edit-comment-btn">
+          <span class="material-symbols-outlined"> send </span>
+        </button>
+      </div>
+    `;
+  };
+
+  const _renderCommetBody = (comment) => {
+    return comment.editMode
+      ? _renderEditComment(comment.text)
+      : `<p class="comment-text">${comment.text}</p>`;
+  };
+
   const _renderComments = (comments) => {
     let allComments = "";
     comments.forEach((comment, idx) => {
       const isEven = idx % 2 === 0 ? "even" : "";
       allComments += `
           <div class="comment-controller ${isEven}" data-id="${comment.id}">
-          <p class="comment-text">${comment.text}</p>
+          ${_renderCommetBody(comment)} 
           ${_renderEdtingBtns("comment")}
           </div>
       `;
@@ -71,8 +94,8 @@ const Renderer = function () {
         <input
           class="text-input"
           type="text"
-          id="post-text"
-          name="post-text"
+          id="edited-post-text"
+          name="edited-post-text"
           value="${text}"
         />
         <button class="btn edit-post-btn">

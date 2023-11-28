@@ -8,9 +8,9 @@ const Tweeter = function () {
       dislikeCounter: 0,
       date: "&nbsp; Tue &nbsp; 11/28/2023 &nbsp; 9:19 &nbsp; PM",
       comments: [
-        { id: "c1", text: "First comment on first post!" },
-        { id: "c2", text: "Second comment on first post!!" },
-        { id: "c3", text: "Third comment on first post!!!" },
+        { id: "c1", text: "First comment on first post!", editMode: false },
+        { id: "c2", text: "Second comment on first post!!", editMode: false },
+        { id: "c3", text: "Third comment on first post!!!", editMode: false },
       ],
       editMode: false,
     },
@@ -24,9 +24,10 @@ const Tweeter = function () {
         {
           id: "c4",
           text: "Don't wory second poster, you'll be first one day.",
+          editMode: false,
         },
-        { id: "c5", text: "Yeah, believe in yourself!" },
-        { id: "c6", text: "Haha second place what a joke." },
+        { id: "c5", text: "Yeah, believe in yourself!", editMode: false },
+        { id: "c6", text: "Haha second place what a joke.", editMode: false },
       ],
       editMode: false,
     },
@@ -90,21 +91,13 @@ const Tweeter = function () {
     };
   }
 
-  function enterEditMode(postID) {
+  function enterPostEditMode(postID) {
     const postIdx = _posts.findIndex((post) => post.id === postID);
     if (postIdx === -1) {
       return console.log("Post does not exist");
     }
     _posts[postIdx].editMode = true;
   }
-
-  // function exitEditMode(postID) {
-  //   const postIdx = _posts.findIndex((post) => post.id === postID);
-  //   if (postIdx === -1) {
-  //     return console.log("Post does not exist");
-  //   }
-  //   _posts[postIdx].editMode = false;
-  // }
 
   function removePost(postID) {
     const postIdx = _posts.findIndex((post) => post.id === postID);
@@ -123,6 +116,35 @@ const Tweeter = function () {
     const newComment = { id: _generateCommentID(), text };
     _posts[postIdx].comments.push(newComment);
     return newComment;
+  }
+
+  function enterCommentEditMode(postID, commentID) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    const commentIdx = _posts[postIdx].comments.findIndex(
+      (comment) => comment.id === commentID
+    );
+    if (commentIdx === -1) {
+      return console.log("Comment does not exist");
+    }
+    _posts[postIdx].comments[commentIdx].editMode = true;
+  }
+
+  function updateComment(postID, commentID, newText) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    const commentIdx = _posts[postIdx].comments.findIndex(
+      (comment) => comment.id === commentID
+    );
+    if (commentIdx === -1) {
+      return console.log("Comment does not exist");
+    }
+    _posts[postIdx].comments[commentIdx].text = newText;
+    _posts[postIdx].comments[commentIdx].editMode = false;
   }
 
   function removeComment(postID, commentID) {
@@ -163,7 +185,9 @@ const Tweeter = function () {
     removeComment,
     likePost,
     dislikePost,
-    enterEditMode,
+    enterPostEditMode,
     updatePost,
+    enterCommentEditMode,
+    updateComment,
   };
 };

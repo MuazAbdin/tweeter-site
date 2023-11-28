@@ -17,9 +17,9 @@ $(".all-posts").on("click", ".post-controller .del-btn", function () {
   renderer.renderPosts(tweeter.getPosts());
 });
 
-// Edit Mode
+// Post Edit Mode
 $(".all-posts").on("click", ".post-controller .edit-btn", function () {
-  tweeter.enterEditMode($(this).closest(".post").data().id);
+  tweeter.enterPostEditMode($(this).closest(".post").data().id);
   renderer.renderPosts(tweeter.getPosts());
 });
 
@@ -47,6 +47,23 @@ $(".all-posts").on("click", ".comment-btn", function () {
   const input = $(this).prev();
   tweeter.addComment(input.val(), postID);
   input.val("");
+  renderer.renderPosts(tweeter.getPosts());
+});
+
+// Comment Edit Mode
+$(".all-posts").on("click", ".comment-controller .edit-btn", function () {
+  const postID = $(this).closest(".post").data().id;
+  const commentID = $(this).closest(".comment-controller").data().id;
+  tweeter.enterCommentEditMode(postID, commentID);
+  renderer.renderPosts(tweeter.getPosts());
+});
+
+// Update Comment
+$(".all-posts").on("click", ".edit-comment-btn", function () {
+  const postID = $(this).closest(".post").data().id;
+  const commentID = $(this).closest(".comment-controller").data().id;
+  const newText = $(this).prev().val();
+  tweeter.updateComment(postID, commentID, newText);
   renderer.renderPosts(tweeter.getPosts());
 });
 
