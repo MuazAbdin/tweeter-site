@@ -113,7 +113,8 @@ main {
   font-family: var(--secondary-font);
 }
 
-.post-btn {
+#post-btn,
+.comment-btn {
   flex-grow: 1;
   height: 100%;
   padding: var(--padding-size);

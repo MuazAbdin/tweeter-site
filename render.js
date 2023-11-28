@@ -33,7 +33,7 @@ const Renderer = function () {
           name="comment-text-${id}"
           placeholder="Got something to say?"
         />
-        <button class="post-btn">Comment</button>
+        <button class="comment-btn">Comment</button>
       </div>
     `;
   };
