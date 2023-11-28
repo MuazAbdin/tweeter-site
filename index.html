@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="style.css" />
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
@@ -16,15 +17,19 @@
     ></script>
     <script src="model.js" defer></script>
     <script src="render.js" defer></script>
-    <!-- <script src="logic.js" defer></script> -->
     <script src="main.js" defer></script>
 
     <title>Tweeter</title>
   </head>
-  <body id="body-container">
+
+  <body>
     <header class="main-header">
-      <h2>TWEETER</h2>
+      <div class="logo">
+        <img src="./bird.svg" alt="Tweeter Logo" />
+      </div>
+      <h1 class="main-title">TWEETER</h1>
     </header>
+
     <main>
       <div class="new-text-component new-post">
         <input
@@ -34,10 +39,14 @@
           name="post-text"
           placeholder="What's in your mind?"
         />
-        <button id="post-btn">Twit</button>
+        <button class="btn post-btn">
+          twit
+          <span class="material-symbols-outlined"> send </span>
+        </button>
       </div>
       <section class="all-posts"></section>
     </main>
+
     <footer class="main-footer">Designed by: Muaz Abdin</footer>
   </body>
 </html>

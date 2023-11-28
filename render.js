@@ -1,21 +1,26 @@
 const Renderer = function () {
   /* Private methods */
-  const _renderDelBtn = (text) => {
+  const _renderEdtingBtns = (type) => {
     return `
-      <button class="btn del-btn">
-        <span class="material-symbols-outlined"> delete </span>
-        ${text || ""}
-      </button>
+      <div class="editing-btns ${type}-btns">
+        <button class="btn del-btn">
+          <span class="material-symbols-outlined"> delete </span>
+        </button>
+        <button class="btn edit-btn">
+          <span class="material-symbols-outlined"> edit_note </span>
+        </button>
+      </div>
     `;
   };
 
   const _renderComments = (comments) => {
     let allComments = "";
-    comments.forEach((comment) => {
+    comments.forEach((comment, idx) => {
+      const isEven = idx % 2 === 0 ? "even" : "";
       allComments += `
-          <div class="comment-controller" data-id="${comment.id}">
-            ${_renderDelBtn()}
-            <p class="comment-text">${comment.text}</p>
+          <div class="comment-controller ${isEven}" data-id="${comment.id}">
+          <p class="comment-text">${comment.text}</p>
+          ${_renderEdtingBtns("comment")}
           </div>
       `;
     });
@@ -33,7 +38,29 @@ const Renderer = function () {
           name="comment-text-${id}"
           placeholder="Got something to say?"
         />
-        <button class="comment-btn">Comment</button>
+        <button class="btn comment-btn">
+          <span class="material-symbols-outlined"> send </span>
+        </button>
+      </div>
+    `;
+  };
+
+  const _renderLikeDateBar = () => {
+    return `
+      <div class="like-date-bar">
+        <div class="like-post">
+          <span class="btn material-symbols-outlined">
+            thumb_up
+            <div class="counter like-counter">1</div>
+          </span>
+          <span class="btn material-symbols-outlined">
+            thumb_down
+            <div class="counter dislike-counter">1</div>
+          </span>
+        </div>
+        <div class="post-date">
+          <b>Last Updated:</b>&nbsp; Tue &nbsp; 25-11-2023 &nbsp; 17:30
+        </div>
       </div>
     `;
   };
@@ -46,7 +73,8 @@ const Renderer = function () {
         <article class="post" data-id="${post.id}">
           <div class="post-controller">
             <p class="post-text">${post.text}</p>
-            ${_renderDelBtn("Delete Post")}
+            ${_renderEdtingBtns("post")}
+            ${_renderLikeDateBar()}
           </div>
           ${_renderComments(post.comments)}
           ${_renderAddCommnet(post.id)}

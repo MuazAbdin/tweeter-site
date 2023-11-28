@@ -3,7 +3,7 @@ const renderer = Renderer();
 
 /* EventListeners */
 // TWIT button
-$("#post-btn").click(function () {
+$(".post-btn").click(function () {
   const input = $(this).prev();
   // console.log(input.val());
   tweeter.addPost(input.val());
