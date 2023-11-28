@@ -4,6 +4,9 @@ const Tweeter = function () {
     {
       text: "First post!",
       id: "p1",
+      likeCounter: 0,
+      dislikeCounter: 0,
+      date: "&nbsp; Tue &nbsp; 11/28/2023 &nbsp; 9:19 &nbsp; PM",
       comments: [
         { id: "c1", text: "First comment on first post!" },
         { id: "c2", text: "Second comment on first post!!" },
@@ -13,6 +16,9 @@ const Tweeter = function () {
     {
       text: "Aw man, I wanted to be first",
       id: "p2",
+      likeCounter: 0,
+      dislikeCounter: 0,
+      date: "&nbsp; Tue &nbsp; 11/28/2023 &nbsp; 9:19 &nbsp; PM",
       comments: [
         {
           id: "c4",
@@ -36,14 +42,35 @@ const Tweeter = function () {
     return `c${++commentIdCounter}`;
   }
 
+  function _getDate() {
+    let date = new Date();
+    const day = date.toString().slice(0, 3);
+    let time = date.toLocaleString();
+    time = time.slice(0, -6) + time.slice(-3);
+    time = time.split(" ");
+    return (
+      `&nbsp; ${day} ` +
+      `&nbsp; ${time[0].slice(0, -1)} ` +
+      `&nbsp; ${time[1]} ` +
+      `&nbsp; ${time[2]}`
+    );
+  }
+
   /* Public Methods */
   function getPosts() {
     return _posts;
   }
 
   function addPost(text) {
-    const newPost = { text, id: _generatePostID(), comments: [] };
-    _posts.push(newPost);
+    const newPost = {
+      text,
+      id: _generatePostID(),
+      likeCounter: 0,
+      dislikeCounter: 0,
+      date: _getDate(),
+      comments: [],
+    };
+    _posts.splice(0, 0, newPost);
     return newPost;
   }
 
@@ -80,5 +107,29 @@ const Tweeter = function () {
     _posts[postIdx].comments.splice(commentIdx, 1);
   }
 
-  return { getPosts, addPost, removePost, addComment, removeComment };
+  function likePost(postID) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    _posts[postIdx].likeCounter++;
+  }
+
+  function dislikePost(postID) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    _posts[postIdx].dislikeCounter++;
+  }
+
+  return {
+    getPosts,
+    addPost,
+    removePost,
+    addComment,
+    removeComment,
+    likePost,
+    dislikePost,
+  };
 };

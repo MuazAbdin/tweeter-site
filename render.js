@@ -45,21 +45,21 @@ const Renderer = function () {
     `;
   };
 
-  const _renderLikeDateBar = () => {
+  const _renderLikeDateBar = (likeCounter, dislikeCounter, date) => {
     return `
       <div class="like-date-bar">
         <div class="like-post">
-          <span class="btn material-symbols-outlined">
+          <span class="btn like-btn material-symbols-outlined">
             thumb_up
-            <div class="counter like-counter">1</div>
+            <div class="counter like-counter">${likeCounter}</div>
           </span>
-          <span class="btn material-symbols-outlined">
+          <span class="btn dislike-btn material-symbols-outlined">
             thumb_down
-            <div class="counter dislike-counter">1</div>
+            <div class="counter dislike-counter">${dislikeCounter}</div>
           </span>
         </div>
         <div class="post-date">
-          <b>Last Updated:</b>&nbsp; Tue &nbsp; 25-11-2023 &nbsp; 17:30
+          <b>Last Updated:</b>${date}
         </div>
       </div>
     `;
@@ -74,7 +74,11 @@ const Renderer = function () {
           <div class="post-controller">
             <p class="post-text">${post.text}</p>
             ${_renderEdtingBtns("post")}
-            ${_renderLikeDateBar()}
+            ${_renderLikeDateBar(
+              post.likeCounter,
+              post.dislikeCounter,
+              post.date
+            )}
           </div>
           ${_renderComments(post.comments)}
           ${_renderAddCommnet(post.id)}
