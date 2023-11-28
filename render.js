@@ -65,6 +65,29 @@ const Renderer = function () {
     `;
   };
 
+  const _renderEditPost = (text) => {
+    return `
+      <div class="new-text-component edit-post">
+        <input
+          class="text-input"
+          type="text"
+          id="post-text"
+          name="post-text"
+          value="${text}"
+        />
+        <button class="btn edit-post-btn">
+          <span class="material-symbols-outlined"> send </span>
+        </button>
+      </div>
+    `;
+  };
+
+  const _renderPostBody = (post) => {
+    return post.editMode
+      ? _renderEditPost(post.text)
+      : `<p class="post-text">${post.text}</p>`;
+  };
+
   /* Public methods */
   const renderPosts = function (posts) {
     $(".all-posts").empty();
@@ -72,7 +95,7 @@ const Renderer = function () {
       $(".all-posts").append(`
         <article class="post" data-id="${post.id}">
           <div class="post-controller">
-            <p class="post-text">${post.text}</p>
+            ${_renderPostBody(post)}            
             ${_renderEdtingBtns("post")}
             ${_renderLikeDateBar(
               post.likeCounter,

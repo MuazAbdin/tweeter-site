@@ -17,6 +17,18 @@ $(".all-posts").on("click", ".post-controller .del-btn", function () {
   renderer.renderPosts(tweeter.getPosts());
 });
 
+// Edit Mode
+$(".all-posts").on("click", ".post-controller .edit-btn", function () {
+  tweeter.enterEditMode($(this).closest(".post").data().id);
+  renderer.renderPosts(tweeter.getPosts());
+});
+
+// Update post
+$(".all-posts").on("click", ".edit-post-btn", function () {
+  tweeter.updatePost($(this).closest(".post").data().id, $(this).prev().val());
+  renderer.renderPosts(tweeter.getPosts());
+});
+
 // Like Post button like_btn
 $(".all-posts").on("click", ".like-btn", function () {
   tweeter.likePost($(this).closest(".post").data().id);

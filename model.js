@@ -12,6 +12,7 @@ const Tweeter = function () {
         { id: "c2", text: "Second comment on first post!!" },
         { id: "c3", text: "Third comment on first post!!!" },
       ],
+      editMode: false,
     },
     {
       text: "Aw man, I wanted to be first",
@@ -27,6 +28,7 @@ const Tweeter = function () {
         { id: "c5", text: "Yeah, believe in yourself!" },
         { id: "c6", text: "Haha second place what a joke." },
       ],
+      editMode: false,
     },
   ];
 
@@ -69,10 +71,40 @@ const Tweeter = function () {
       dislikeCounter: 0,
       date: _getDate(),
       comments: [],
+      editMode: false,
     };
     _posts.splice(0, 0, newPost);
     return newPost;
   }
+
+  function updatePost(postID, newText) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    _posts[postIdx] = {
+      ..._posts[postIdx],
+      text: newText,
+      date: _getDate(),
+      editMode: false,
+    };
+  }
+
+  function enterEditMode(postID) {
+    const postIdx = _posts.findIndex((post) => post.id === postID);
+    if (postIdx === -1) {
+      return console.log("Post does not exist");
+    }
+    _posts[postIdx].editMode = true;
+  }
+
+  // function exitEditMode(postID) {
+  //   const postIdx = _posts.findIndex((post) => post.id === postID);
+  //   if (postIdx === -1) {
+  //     return console.log("Post does not exist");
+  //   }
+  //   _posts[postIdx].editMode = false;
+  // }
 
   function removePost(postID) {
     const postIdx = _posts.findIndex((post) => post.id === postID);
@@ -131,5 +163,7 @@ const Tweeter = function () {
     removeComment,
     likePost,
     dislikePost,
+    enterEditMode,
+    updatePost,
   };
 };
