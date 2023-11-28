@@ -11,4 +11,10 @@ $("#post-btn").click(function () {
   renderer.renderPosts(tweeter.getPosts());
 });
 
+// Delete Post button
+$(".all-posts").on("click", ".post-controller .del-btn", function () {
+  tweeter.removePost($(this).closest(".post").data().id);
+  renderer.renderPosts(tweeter.getPosts());
+});
+
 renderer.renderPosts(tweeter.getPosts());
