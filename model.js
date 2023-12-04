@@ -61,6 +61,14 @@ const Tweeter = function () {
     );
   }
 
+  function _findRecordByID(records, id) {
+    const idx = records.findIndex((record) => record.id === id);
+    if (idx === -1) {
+      throw new Error("ID does not exist");
+    }
+    return idx;
+  }
+
   /* Public Methods */
   function getPosts() {
     return _posts;
@@ -81,102 +89,92 @@ const Tweeter = function () {
   }
 
   function updatePost(postID, newText) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      _posts[postIdx].text = newText;
+      _posts[postIdx].date = _getDate();
+      _posts[postIdx].editMode = false;
+    } catch (error) {
+      console.log(error.message);
     }
-    _posts[postIdx] = {
-      ..._posts[postIdx],
-      text: newText,
-      date: _getDate(),
-      editMode: false,
-    };
   }
 
   function enterPostEditMode(postID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      _posts[postIdx].editMode = true;
+    } catch (error) {
+      console.log(error.message);
     }
-    _posts[postIdx].editMode = true;
   }
 
   function removePost(postID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      _posts.splice(postIdx, 1);
+    } catch (error) {
+      console.log(error.message);
     }
-    _posts.splice(postIdx, 1);
-    // _posts.filter((post) => post.id !== postID);
   }
 
   function addComment(text, postID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      const newComment = { id: _generateCommentID(), text, editMode: false };
+      _posts[postIdx].comments.push(newComment);
+      return newComment;
+    } catch (error) {
+      console.log(error.message);
     }
-    const newComment = { id: _generateCommentID(), text, editMode: false };
-    _posts[postIdx].comments.push(newComment);
-    return newComment;
   }
 
   function enterCommentEditMode(postID, commentID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      const commentIdx = _findRecordByID(_posts[postIdx].comments, commentID);
+      _posts[postIdx].comments[commentIdx].editMode = true;
+    } catch (error) {
+      console.log(error.message);
     }
-    const commentIdx = _posts[postIdx].comments.findIndex(
-      (comment) => comment.id === commentID
-    );
-    if (commentIdx === -1) {
-      return console.log("Comment does not exist");
-    }
-    _posts[postIdx].comments[commentIdx].editMode = true;
   }
 
   function updateComment(postID, commentID, newText) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      const commentIdx = _findRecordByID(_posts[postIdx].comments, commentID);
+      _posts[postIdx].comments[commentIdx].text = newText;
+      _posts[postIdx].comments[commentIdx].editMode = false;
+    } catch (error) {
+      console.log(error.message);
     }
-    const commentIdx = _posts[postIdx].comments.findIndex(
-      (comment) => comment.id === commentID
-    );
-    if (commentIdx === -1) {
-      return console.log("Comment does not exist");
-    }
-    _posts[postIdx].comments[commentIdx].text = newText;
-    _posts[postIdx].comments[commentIdx].editMode = false;
   }
 
   function removeComment(postID, commentID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      const commentIdx = _findRecordByID(_posts[postIdx].comments, commentID);
+      _posts[postIdx].comments.splice(commentIdx, 1);
+    } catch (error) {
+      console.log(error.message);
     }
-    const commentIdx = _posts[postIdx].comments.findIndex(
-      (comment) => comment.id === commentID
-    );
-    if (commentIdx === -1) {
-      return console.log("Comment does not exist");
-    }
-    _posts[postIdx].comments.splice(commentIdx, 1);
   }
 
   function likePost(postID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      _posts[postIdx].likeCounter++;
+    } catch (error) {
+      console.log(error.message);
     }
-    _posts[postIdx].likeCounter++;
   }
 
   function dislikePost(postID) {
-    const postIdx = _posts.findIndex((post) => post.id === postID);
-    if (postIdx === -1) {
-      return console.log("Post does not exist");
+    try {
+      const postIdx = _findRecordByID(_posts, postID);
+      _posts[postIdx].dislikeCounter++;
+    } catch (error) {
+      console.log(error.message);
     }
-    _posts[postIdx].dislikeCounter++;
   }
 
   return {
