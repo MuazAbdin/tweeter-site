@@ -118,7 +118,7 @@ const Renderer = function () {
       $(".all-posts").append(`
         <article class="post" data-id="${post.id}">
           <div class="post-controller">
-            ${_renderPostBody(post)}            
+            ${_renderPostBody(post)}
             ${_renderEdtingBtns("post")}
             ${_renderLikeDateBar(
               post.likeCounter,

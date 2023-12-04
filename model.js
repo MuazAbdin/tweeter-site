@@ -6,6 +6,7 @@ const Tweeter = function () {
       id: "p1",
       likeCounter: 0,
       dislikeCounter: 0,
+      // date: "Tue 11/28/2023 9:19 PM",
       date: "&nbsp; Tue &nbsp; 11/28/2023 &nbsp; 9:19 &nbsp; PM",
       comments: [
         { id: "c1", text: "First comment on first post!", editMode: false },
@@ -19,6 +20,7 @@ const Tweeter = function () {
       id: "p2",
       likeCounter: 0,
       dislikeCounter: 0,
+      // date: "Tue 11/28/2023 9:19 PM",
       date: "&nbsp; Tue &nbsp; 11/28/2023 &nbsp; 9:19 &nbsp; PM",
       comments: [
         {
@@ -113,7 +115,7 @@ const Tweeter = function () {
     if (postIdx === -1) {
       return console.log("Post does not exist");
     }
-    const newComment = { id: _generateCommentID(), text };
+    const newComment = { id: _generateCommentID(), text, editMode: false };
     _posts[postIdx].comments.push(newComment);
     return newComment;
   }
