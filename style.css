@@ -99,7 +99,7 @@ main {
   height: 2.5rem;
   width: 75%;
   justify-content: center;
-  margin: 10px auto 0px auto;
+  margin: 5px auto;
 }
 
 .text-input {
@@ -182,7 +182,7 @@ main {
   /* border: 2px solid black; */
   border-radius: var(--border-radius);
   box-shadow: 0px 0px 5px;
-  padding: 5px;
+  padding: 5px 5px 10px 5px;
   width: 100%;
   font-family: var(--secondary-font);
   text-shadow: none;
@@ -190,7 +190,7 @@ main {
 
 .post-controller {
   background-color: var(--grey-100);
-  margin: 5px 5px 15px 5px;
+  margin: 5px;
   box-shadow: 0px 0px 5px black;
   border-radius: var(--border-radius);
   display: grid;

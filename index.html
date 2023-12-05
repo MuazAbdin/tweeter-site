@@ -88,7 +88,7 @@
     <script type="text/x-handlebars-template" id="all-comments-template">
       <div class="all-comments">
         {{#each this.comments}}
-          <div class="comment-controller {{#isEven @index}}{{/isEven}}"
+          <div class="comment-controller {{isEven @index}}"
                data-id="{{this.id}}">
             {{> commentBody}}
             {{> editingBtns}}
@@ -158,8 +158,8 @@
             {{> editingBtns}}
             {{> likeDateBar}}
           </div>
-          {{> allComments}}
           {{> addComment}}
+          {{> allComments}}
         </article>
       {{/each}}
     </script>

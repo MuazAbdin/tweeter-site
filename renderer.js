@@ -126,8 +126,8 @@ const Renderer = function () {
               post.date
             )}
           </div>
-          ${_renderComments(post.comments)}
           ${_renderAddCommnet(post.id)}
+          ${_renderComments(post.comments)}
         </article>
       `);
     });
